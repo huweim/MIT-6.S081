@@ -83,7 +83,8 @@
   }
   ```
 
-+ <img src="./Image/Fig_2.png" align="left" alt="image-20210227144801015" style="zoom:80%;" />
+
+<img src="./Image/Fig_2.png" align="left" alt="image-20210227144801015" style="zoom:80%;" />
 
 #### V. echo
 
@@ -128,11 +129,21 @@
 
 ### 1.4 File System
 
++ A path like /a/b/c refers to the file or directory named c inside the directory named b inside the directory named a in the root directory /.
 
+##### I. Operation
 
++ There are system calls to create new files and directories
+  + `mkdir` creates a new directory
+  + `open` with the `O_CREATE` flag creates a new data file
+  + `mknod` creates a new device file
++ `inode` - the entity of file, `links` - file name, one file can have multiple names. An inode holds `metadata` about a file, including type (file or directory or device), length, location and the number of links to a file.
++ `link` links file name to a file.
++ `unlink` unlinks the file name.
 
+##### II. why `cd` is embedded in the shell
 
-
++ `cd` is an exception. If `cd` were run as a regular command, then the shell would fork a child process, the child process would run `cd`, and `cd` would change the child ’s working directory. The parent’s (i.e., the shell’s) working directory would not change.
 
 + 笔记参考：
   + [https://github.com/philoinovsky/MIT_OS]

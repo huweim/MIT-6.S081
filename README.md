@@ -47,7 +47,7 @@ riscv64-unknown-elf-gcc
 sudo apt install riscv64-unknown-elf-gcc
 ```
 
-![image-20210224150612152](D:\STU\2021-Spring\Core Course\MIT 6.S081\Image\image-20210224150612152.png)
+![Fig_1](./Image/Fig_1.jpg)
 
 同理测试和安装
 
@@ -73,7 +73,7 @@ git checkout util
 sudo make qemu
 ```
 
-![image-20210224153610252](C:\Users\50683\AppData\Roaming\Typora\typora-user-images\image-20210224153610252.png)
+![image-20210224153610252](./Image/Fig_2.png)
 
 booting成功后完成搭建
 
