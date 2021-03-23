@@ -34,7 +34,7 @@ Ctrl-a x: quit qemu type
 
 ## Sleep
 
-### Goal
+### I. Goal
 
 Implement the UNIX program `sleep` for xv6; your `sleep` should pause for a user-specified number of ticks. A tick is a notion of time defined by the xv6 kernel, namely the time between two interrupts from the timer chip. Your solution should be in the file `user/sleep.c`.
 
@@ -45,7 +45,7 @@ Implement the UNIX program `sleep` for xv6; your `sleep` should pause for a user
 
 理解为检测到tick就发出一个pause的动作？
 
-### hints
+### II. Hints
 
 + 根据Lec01的任务，先阅读xv6 book的Chapter 1
 + 去看/user文件中的一些C文件的源码，see how can obtain the **command-line arguments** passed to a program.
@@ -58,8 +58,34 @@ Implement the UNIX program `sleep` for xv6; your `sleep` should pause for a user
   + 记得退出的时候要有exit()，提醒不要犯基础的错误
 + Add your `sleep` program to `UPROGS` in Makefile; once you've done that, `make qemu` will compile your program and you'll be able to run it from the xv6 shell.
 + Look at Kernighan and Ritchie's book *The C programming language (second edition)* (K&R) to learn about C.
++ xv6中一个tick为100ms
 
-### Step
+### III. Step
 
-+ 所以要先找到这个arguments如何获得
++ 观察`/user`中的一些源码，在`sleep.c`文件中引入所需要头文件
++ 接受传入 main 函数的参数，并调用 sleep 函数。
++ 退出时记得设置 `exit()`
+
+### IV. Code
+
+```c++
+#include "kernel/types.h"
+#include "kernel/stat.h"
+#include "user/user.h"
+
+#define STDIN_FILENO  0   
+#define STDOUT_FILENO 1
+#define STDDER_FILENO 2
+
+int main(int argc, char *argv[]){
+  if(argc != 2){
+      fprintf(2, "usage: sleep time\n");  //argc!=2返回错误或退出，是为了限制参数个数为2
+      exit(1);
+  } else {
+      int time = atoi(argv[1]);  //string -> int
+      sleep(time);  //just call sleep 
+      exit(0);
+  }
+}
+```
 
